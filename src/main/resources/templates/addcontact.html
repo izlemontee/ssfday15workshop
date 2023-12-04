@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Add contact</title>
+</head>
+<body>
+    <h1>Add a contact</h1>
+    <div class="container">
+        <!-- to view this form, the end point is /contacts/addcontact -->
+        <form method="post" th:action="@{/contacts/savecontact}" th:object="${contact}"> 
+            <!-- th:action="@{/contacts/savecontact} -> submitting the form will call this end point -->
+            <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" name="name" th:field="*{name}">
+            </div>
+            <!-- if you dont put this, you will trigger the error, but the user wont be alerted -->
+            <div class="alert alert-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div> 
+
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" name="email" th:field="*{email}">
+            </div>
+            <div class="alert alert-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div> 
+
+            <div class="mb-3">
+                <label for="phone" class="form-label">Phone</label>
+                <input type="text" class="form-control" name="phone" th:field="*{phone}">
+            </div>
+            <div class="alert alert-danger" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></div> 
+
+            <div class="mb-3">
+                <label for="birthday" class="form-label">Birthday</label>
+                <input type="date" class="form-control" name="birthday" th:field="*{birthday}">
+            </div>
+            <div class="alert alert-danger" th:if="${#fields.hasErrors('birthday')}" th:errors="*{birthday}"></div> 
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+</body>
+</html>
